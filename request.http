@@ -6,3 +6,10 @@ Content-Type: application/json
     "email":"asdf@asdf.com",
     "password":"asdf"
 }
+
+
+
+
+
+###
+https://localhost/api/users/killers
