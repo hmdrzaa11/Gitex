@@ -3,13 +3,10 @@ POST https://localhost/api/users/signup
 Content-Type: application/json
 
 {
-    "email":"asdf@asdf.com",
+    "email":"wlf@asdf.com",
     "password":"asdf"
 }
 
 
 
 
-
-###
-https://localhost/api/users/killers
