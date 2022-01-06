@@ -3,7 +3,7 @@ POST https://localhost/api/users/signup
 Content-Type: application/json
 
 {
-    "email":"test@asdf.com",
+    "email":"asdf@asdf.com",
     "password":"asdf"
 }
 
@@ -15,6 +15,6 @@ POST https://localhost/api/users/signin
 Content-Type: application/json
 
 {
-    "email":"",
-    "password":""
+    "email":"asdf@asdf.com",
+    "password":"asdf"
 }
