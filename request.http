@@ -18,3 +18,11 @@ Content-Type: application/json
     "email":"asdf@asdf.com",
     "password":"asdf"
 }
+
+
+### CURRENT USER
+GET https://localhost/api/users/currentuser
+
+
+### SIGN OUT
+POST https://localhost/api/users/signout
