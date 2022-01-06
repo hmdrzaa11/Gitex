@@ -3,7 +3,7 @@ POST https://localhost/api/users/signup
 Content-Type: application/json
 
 {
-    "email":"wlf@asdf.com",
+    "email":"akd@asdf.com",
     "password":"asdf"
 }
 
