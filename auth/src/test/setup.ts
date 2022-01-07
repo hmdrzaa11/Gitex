@@ -4,6 +4,7 @@ import { app } from "../app";
 
 let mongod: any;
 beforeAll(async () => {
+  process.env.JWT_KEY = "asdf";
   //setup mongo
   mongod = await MongoMemoryServer.create();
   let mongoUri = mongod.getUri();
