@@ -27,3 +27,12 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
+
+    - image: hmdrzadev/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
