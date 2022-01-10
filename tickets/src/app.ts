@@ -1,10 +1,13 @@
 import express from "express";
 import "express-async-errors";
 import { json } from "body-parser";
-import { errorHandler, NotFoundError } from "@hamidtickets/common";
+import { errorHandler, NotFoundError, currentUser } from "@hamidtickets/common";
 import cookieSession from "cookie-session";
 
 import { createTicketsRouter } from "./routes/new";
+import { showTicketRouter } from "./routes/show";
+import { indexTicketRouter } from "./routes/index";
+import { updateTicketRouter } from "./routes/update";
 
 let app = express();
 app.set("trust proxy", true);
@@ -17,7 +20,12 @@ app.use(
   })
 );
 
+app.use(currentUser);
+
 app.use(createTicketsRouter);
+app.use(showTicketRouter);
+app.use(indexTicketRouter);
+app.use(updateTicketRouter);
 
 app.all("*", async (req, res, next) => {
   next(new NotFoundError());
