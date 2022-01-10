@@ -26,3 +26,34 @@ GET https://localhost/api/users/currentuser
 
 ### SIGN OUT
 POST https://localhost/api/users/signout
+
+
+### CREATE TICKET
+POST https://localhost/api/tickets
+Content-Type: application/json
+
+{
+    "title":"concert",
+    "price":10
+}
+
+
+
+### GET A TICKET
+GET https://localhost/api/tickets/61dcaaad258e4100396baf7f
+
+
+
+### GET ALL TICKETS
+GET https://localhost/api/tickets
+
+
+
+### UPDATE A TICKET
+PUT https://localhost/api/tickets/61dcaaad258e4100396baf7f
+Content-Type: application/json
+
+{
+    "title":"Eminem Concert",
+    "price":500
+}
