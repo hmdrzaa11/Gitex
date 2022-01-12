@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { app } from "./app";
+import { natsWrapper } from "./nats-wrapper";
 
 let start = async () => {
   //check for Env Vars
@@ -12,6 +13,14 @@ let start = async () => {
       useCreateIndex: true,
     });
     console.log("Connected to MongoDB!");
+    natsWrapper.connect("ticketing", "asdf", "http://nats-srv:4222");
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed!");
+      process.exit();
+    });
+
+    process.on("SIGTERM", () => natsWrapper.client.close());
+    process.on("SIGINT", () => natsWrapper.client.close());
   } catch (error) {
     console.error(error);
   }
