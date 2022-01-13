@@ -8,6 +8,8 @@ declare global {
   var signin: () => string[];
 }
 
+jest.mock("../nats-wrapper.ts");
+
 let mongod: any;
 beforeAll(async () => {
   process.env.JWT_KEY = "asdf";
@@ -22,6 +24,7 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+  jest.clearAllMocks();
   //we are going to delete and reset all the data
   let collections = await mongoose.connection.db.collections();
   for (let collection of collections) {
