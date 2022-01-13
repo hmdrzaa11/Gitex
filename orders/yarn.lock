@@ -286,10 +286,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@hamidtickets/common@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.npmjs.org/@hamidtickets/common/-/common-1.0.5.tgz#b820dbb0e8c351b1da32a646d87607d549f01ad5"
-  integrity sha512-tIYD2et09yMMbiqbonEspDYVT/hPpyumzr9ePuakzWY37pvSDsYq/oitqaBIa3hli6K3BmwQfx+MSsXIlryfgg==
+"@hamidtickets/common@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/@hamidtickets/common/-/common-1.0.6.tgz#bdaf416c1cf4e1ea126804565479bcc200f3400a"
+  integrity sha512-v8YgN3+GKtqEC8AexMxIAKnANDmG3S5IlqCY8PHs57goyTK28Ep4DH0fG5HBMCVMetmd335D0quT0RiEKxU++w==
   dependencies:
     "@types/cookie-session" "^2.0.44"
     "@types/express" "^4.17.13"
