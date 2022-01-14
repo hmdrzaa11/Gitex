@@ -1,7 +1,17 @@
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest } from "@hamidtickets/common";
+import {
+  BadRequestError,
+  NotFoundError,
+  OrderStatus,
+  requireAuth,
+  validateRequest,
+} from "@hamidtickets/common";
 import { body } from "express-validator";
+import { Ticket } from "../models/ticket";
+import { Order } from "../models/order";
+
+const EXPIRATION_WINDOW_SECONDS = 15 * 60;
 
 let router = express.Router();
 
@@ -9,7 +19,7 @@ router.post(
   "/api/orders",
   requireAuth,
   [
-    body("titleId")
+    body("ticketId")
       .notEmpty()
       .withMessage("ticketId must be defined")
       .custom((input: string) => {
@@ -18,7 +28,28 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    res.send({});
+    //find the ticket that user is trying to purchase in our replica database of tickets
+    let { ticketId } = req.body;
+    let ticket = await Ticket.findById(ticketId);
+    if (!ticket) throw new NotFoundError();
+    //make sure that ticket is not reserved (means its not tie to an order and if it dose that order must have a cancelled status)
+    let isReserved = await ticket.isReserved();
+    if (isReserved) throw new BadRequestError("Ticket is already reserved");
+    //calculate an expiration date for ticket
+    let expiration = new Date();
+    expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
+    //build the order and save it into DB
+    let order = Order.build({
+      userId: req.currentUser!.id,
+      expiresAt: expiration,
+      ticket,
+      status: OrderStatus.Created,
+    });
+
+    await order.save();
+    //Emit an event saying that an order was created
+
+    res.status(201).send(order);
   }
 );
 
