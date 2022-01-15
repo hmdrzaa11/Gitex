@@ -50,7 +50,7 @@ GET https://localhost/api/tickets
 
 
 ### UPDATE A TICKET
-PUT https://localhost/api/tickets/61dcaaad258e4100396baf7f
+PUT https://localhost/api/tickets/61e2c7a9e63e8b0023d87121
 Content-Type: application/json
 
 {
