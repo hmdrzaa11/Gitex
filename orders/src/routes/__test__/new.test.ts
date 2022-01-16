@@ -16,6 +16,7 @@ it("returns an error if ticket dose not exist", async () => {
 
 it("returns an error if ticket dalready reserved", async () => {
   let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
     title: "concert",
     price: 20,
   });
@@ -42,6 +43,7 @@ it("returns an error if ticket dalready reserved", async () => {
 
 it("reserves a ticket", async () => {
   let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
     title: "Concert",
     price: 20,
   });
@@ -57,6 +59,7 @@ it("reserves a ticket", async () => {
 
 it("emits an order created event", async () => {
   let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
     title: "Concert",
     price: 20,
   });

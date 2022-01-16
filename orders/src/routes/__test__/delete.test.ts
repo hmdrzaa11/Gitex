@@ -1,11 +1,16 @@
 import request from "supertest";
+import mongoose from "mongoose";
 import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
 import { Order, OrderStatus } from "../../models/order";
 import { natsWrapper } from "../../nats-wrapper";
 
 it("marks an order as cancelled", async () => {
-  let ticket = Ticket.build({ title: "Concert", price: 20 });
+  let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
+    title: "Concert",
+    price: 20,
+  });
   await ticket.save();
 
   let user = signin();
@@ -27,7 +32,11 @@ it("marks an order as cancelled", async () => {
 });
 
 it("emits a order cancelled event", async () => {
-  let ticket = Ticket.build({ title: "Concert", price: 20 });
+  let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
+    title: "Concert",
+    price: 20,
+  });
   await ticket.save();
 
   let user = signin();

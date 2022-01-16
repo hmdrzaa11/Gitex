@@ -1,10 +1,15 @@
 import request from "supertest";
+import mongoose from "mongoose";
 import { app } from "../../app";
 import { Order } from "../../models/order";
 import { Ticket } from "../../models/ticket";
 
 let createTicket = async () => {
-  let ticket = Ticket.build({ title: "concert", price: 20 });
+  let ticket = Ticket.build({
+    id: mongoose.Types.ObjectId(),
+    title: "concert",
+    price: 20,
+  });
   await ticket.save();
   return ticket;
 };
