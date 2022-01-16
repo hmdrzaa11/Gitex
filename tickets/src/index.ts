@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { OrderCreatedListener } from "./events/listeners/order-created-listener";
+import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
 
 let start = async () => {
   //check for Env Vars
@@ -31,6 +33,10 @@ let start = async () => {
 
     process.on("SIGTERM", () => natsWrapper.client.close());
     process.on("SIGINT", () => natsWrapper.client.close());
+
+    new OrderCreatedListener(natsWrapper.client).listen();
+
+    new OrderCancelledListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }
