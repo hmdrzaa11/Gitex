@@ -5,6 +5,7 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
+  BadRequestError,
 } from "@hamidtickets/common";
 import { Ticket } from "../models/ticket";
 import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
@@ -23,6 +24,8 @@ router.put(
   async (req: Request, res: Response) => {
     let ticket = await Ticket.findById(req.params.id);
     if (!ticket) throw new NotFoundError();
+    if (ticket.orderId)
+      throw new BadRequestError("can not edit a reserved ticket");
     if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
     }
