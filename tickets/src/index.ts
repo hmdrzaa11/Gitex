@@ -21,7 +21,7 @@ let start = async () => {
       useCreateIndex: true,
     });
     console.log("Connected to MongoDB!");
-    natsWrapper.connect(
+    await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
