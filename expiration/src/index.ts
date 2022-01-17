@@ -1,4 +1,5 @@
 import { natsWrapper } from "./nats-wrapper";
+import { OrderCreatedListener } from "./events/listeners/order-created-listener";
 
 let start = async () => {
   //check for Env Vars
@@ -9,7 +10,7 @@ let start = async () => {
     throw new Error("NATS_CLUSTER_ID must be defined");
 
   try {
-    natsWrapper.connect(
+    await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
@@ -21,6 +22,7 @@ let start = async () => {
 
     process.on("SIGTERM", () => natsWrapper.client.close());
     process.on("SIGINT", () => natsWrapper.client.close());
+    new OrderCreatedListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }
