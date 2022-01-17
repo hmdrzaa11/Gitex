@@ -57,3 +57,14 @@ Content-Type: application/json
     "title":"Eminem Concert",
     "price":500
 }
+
+
+
+
+### CREATE AN ORDER
+POST https://localhost/api/orders/
+Content-Type: application/json
+
+{
+    "ticketId":"61e59a473d4e8200230f03e4"
+}
