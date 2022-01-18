@@ -68,3 +68,12 @@ Content-Type: application/json
 {
     "ticketId":"61e5cb551db8e40023421f46"
 }
+
+
+### CREATE PAYMENTS
+POST https://localhost/api/payments
+Content-Type: application/json
+
+{
+
+}
