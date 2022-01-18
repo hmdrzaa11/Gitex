@@ -10,6 +10,7 @@ import {
 } from "@hamidtickets/common";
 
 import { Order } from "../models/order";
+import { stripe } from "../stripe";
 
 let router = express.Router();
 
@@ -28,6 +29,12 @@ router.post(
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
     if (order.status === OrderStatus.Cancelled)
       throw new BadRequestError("Order is cancelled");
+
+    await stripe.charges.create({
+      currency: "usd",
+      amount: order.price * 100,
+      source: token,
+    });
     res.send({ success: true });
   }
 );
