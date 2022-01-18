@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import { app } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
+import { OrderCreatedListener } from "./events/listeners/order-created-listener";
 
 let start = async () => {
   //check for Env Vars
@@ -28,6 +30,9 @@ let start = async () => {
       console.log("NATS connection closed!");
       process.exit();
     });
+
+    new OrderCancelledListener(natsWrapper.client).listen();
+    new OrderCreatedListener(natsWrapper.client).listen();
 
     process.on("SIGTERM", () => natsWrapper.client.close());
     process.on("SIGINT", () => natsWrapper.client.close());
