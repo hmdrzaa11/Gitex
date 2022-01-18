@@ -11,7 +11,7 @@ let setup = async () => {
     id: mongoose.Types.ObjectId().toHexString(),
     status: OrderStatus.Created,
     price: 10,
-    userdId: "asdf",
+    userId: "asdf",
     version: 0,
   });
 

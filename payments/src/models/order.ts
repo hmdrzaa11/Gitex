@@ -5,7 +5,7 @@ import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 interface OrderAttrs {
   id: string;
   version: number;
-  userdId: string;
+  userId: string;
   price: number;
   status: OrderStatus;
 }
@@ -45,7 +45,7 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
     _id: attrs.id,
     version: attrs.version,
     price: attrs.price,
-    userId: attrs.userdId,
+    userId: attrs.userId,
     status: attrs.status,
   });
 };
