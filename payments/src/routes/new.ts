@@ -2,9 +2,11 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import {
   validateRequest,
-  BadRequestError,
   NotFoundError,
   requireAuth,
+  NotAuthorizedError,
+  OrderStatus,
+  BadRequestError,
 } from "@hamidtickets/common";
 
 import { Order } from "../models/order";
@@ -20,6 +22,12 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
+    let { token, orderId } = req.body;
+    let order = await Order.findById(orderId);
+    if (!order) throw new NotFoundError();
+    if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+    if (order.status === OrderStatus.Cancelled)
+      throw new BadRequestError("Order is cancelled");
     res.send({ success: true });
   }
 );
