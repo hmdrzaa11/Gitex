@@ -4,6 +4,8 @@ import { json } from "body-parser";
 import { errorHandler, NotFoundError, currentUser } from "@hamidtickets/common";
 import cookieSession from "cookie-session";
 
+import { createChargeRouter } from "./routes/new";
+
 let app = express();
 app.set("trust proxy", true);
 
@@ -16,6 +18,8 @@ app.use(
 );
 
 app.use(currentUser);
+
+app.use(createChargeRouter);
 
 app.all("*", async (req, res, next) => {
   next(new NotFoundError());
