@@ -1,5 +1,7 @@
 export let stripe = {
   charges: {
-    create: jest.fn().mockReturnValue({}),
+    create: jest.fn().mockReturnValue({
+      id: "asdf",
+    }),
   },
 };
