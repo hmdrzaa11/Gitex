@@ -11,6 +11,7 @@ import {
 
 import { Order } from "../models/order";
 import { stripe } from "../stripe";
+import { Payment } from "../models/payment";
 
 let router = express.Router();
 
@@ -30,11 +31,16 @@ router.post(
     if (order.status === OrderStatus.Cancelled)
       throw new BadRequestError("Order is cancelled");
 
-    await stripe.charges.create({
+    let charge = await stripe.charges.create({
       currency: "usd",
       amount: order.price * 100,
       source: token,
     });
+    let payment = Payment.build({
+      orderId: orderId,
+      stripeId: charge.id,
+    });
+    await payment.save();
     res.status(201).send({ success: true });
   }
 );
