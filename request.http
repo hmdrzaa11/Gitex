@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
     "title":"concert",
-    "price":10
+    "price":300
 }
 
 
@@ -66,7 +66,7 @@ POST https://localhost/api/orders/
 Content-Type: application/json
 
 {
-    "ticketId":"61e5cb551db8e40023421f46"
+    "ticketId":"61e71999f19d820028ad6382"
 }
 
 
@@ -75,5 +75,6 @@ POST https://localhost/api/payments
 Content-Type: application/json
 
 {
-
+    "orderId":"61e719a4b2fab7002570a89d",
+    "token":"tok_visa"
 }
