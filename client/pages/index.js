@@ -1,8 +1,15 @@
+import Link from "next/link";
+
 let LandingPage = ({ currentUser, tickets }) => {
   let ticketList = tickets.map((ticket) => (
     <tr key={ticket.id}>
       <td>{ticket.title}</td>
       <td>{ticket.price}</td>
+      <td>
+        <Link href="/tickets/[ticketId]" as={`/tickets/${ticket.id}`}>
+          <a className="link-success">View</a>
+        </Link>
+      </td>
     </tr>
   ));
   return (
@@ -13,6 +20,7 @@ let LandingPage = ({ currentUser, tickets }) => {
           <tr>
             <th>Title</th>
             <th>Price</th>
+            <th>Link</th>
           </tr>
         </thead>
         <tbody>{ticketList}</tbody>
