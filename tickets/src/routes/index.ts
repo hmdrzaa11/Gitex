@@ -4,7 +4,9 @@ import { Ticket } from "../models/ticket";
 let router = express.Router();
 
 router.get("/api/tickets", async (req: Request, res: Response) => {
-  let tickets = await Ticket.find({});
+  let tickets = await Ticket.find({
+    orderId: undefined,
+  });
   res.send(tickets);
 });
 
